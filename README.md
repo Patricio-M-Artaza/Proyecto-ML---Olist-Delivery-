@@ -63,7 +63,7 @@ La demo carga `models/final_model.pkl`. El analisis completo esta en los noteboo
 
 Se uso GridSearchCV con `average_precision` para XGBoost y HistGradientBoosting, sin mejora real. Modelo final: XGBoost (`learning_rate=0.05`, `max_depth=6`, `min_child_weight=1`, `n_estimators=400`), porque tiene el mejor PR-AUC en validacion, aunque queda casi empatado con HistGradientBoosting.
 
-**Estadistica.** Test chi-cuadrado entre `customer_state` y `tarde_dia`: chi-cuadrado = 1785,8 con 26 grados de libertad, p < 0,001 y V de Cramer = 0,14 (relacion real pero moderada).
+**Estadistica.** Test chi-cuadrado entre `customer_state` y `tarde_dia`: chi-cuadrado = 1785,8 con 26 grados de libertad, p < 0,001 y V de Cramer = 0,14 (relacion real pero moderada). Para las metricas finales se calcularon intervalos de confianza por bootstrap (ver Resultados).
 
 **Modelo no supervisado.** PCA con 2 componentes (explican el 87 % de la varianza de peso, flete y dias prometidos) y KMeans con 5 grupos (silhouette ~0,35). Se uso para explorar si hay tipos de pedido con mas retrasos.
 
@@ -75,6 +75,8 @@ Se uso GridSearchCV con `average_precision` para XGBoost y HistGradientBoosting,
 |---|---|---|
 | Baseline | 0,5 | 0,068 |
 | XGBoost | 0,725 | 0,168 |
+
+Intervalos de confianza al 95 % (bootstrap con 1.000 remuestreos del test, sin reentrenar): ROC-AUC entre 0,711 y 0,740, PR-AUC entre 0,152 y 0,186, y el 10 % mas riesgoso detecta entre 27,5 % y 32,0 % de los retrasos. Ningun intervalo incluye el valor del azar, asi que el modelo es mejor que adivinar.
 
 El PR-AUC es unas 2,5 veces mejor que el azar. Si se revisa solo el grupo de pedidos con mas riesgo:
 
@@ -108,4 +110,4 @@ Hallazgos del analisis: los pedidos al nordeste de Brasil llegan tarde mucho mas
 |   `-- evaluation.py        # metricas
 |-- requirements.txt
 `-- README.md
-```
+
