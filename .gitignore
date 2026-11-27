@@ -231,3 +231,7 @@ data/processed/*.csv
 
 # Archivos temporales de Python
 __pycache__/
+
+# Guias para asistentes de IA que genera Streamlit
+.agents/
+.claude/skills/
