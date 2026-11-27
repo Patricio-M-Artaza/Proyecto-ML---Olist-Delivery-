@@ -226,3 +226,8 @@ __marimo__/
 data/raw/*
 !data/raw/.gitkeep
 data/processed/*.csv
+# Config de VS CODE
+.vscode/
+
+# Archivos temporales de Python
+__pycache__/
